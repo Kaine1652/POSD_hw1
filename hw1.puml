@@ -1,0 +1,53 @@
+@startuml hw1
+    class Device{
+        +iPins:vector<int>
+        +oPin:int
+        +ID:int
+        +connections:vector<string>
+        +Finish:bool
+        +IsOutput:bool
+        +getOutput():bool
+    }
+
+    class GateAND{
+        +getOutput():bool
+    }
+
+    class GateOR{
+        +getOutput():bool
+    }
+
+    class GateNOT{
+        +getOutput():bool
+    }
+
+    class LogicSimulator{
+        -output:string
+        -toBinary(number:int, numBits:int):string
+        -ProcessResult(gate:*Device):void
+        +circuit:vector<*Device>
+        +NI:int
+        +NG:int
+        +NO:int
+        +inputs:vector<int>
+        +load(filepath:const string&):bool
+        +getSimulationResult(inputs:vector<int>):string
+        +getTruthTable():string
+    }
+
+    class TextUI {
+        -simulator:LogicSimulator
+        -IsFileLoaded:bool
+        +displayMenu():void
+        +processCommand():void
+        +CommandLoad():void
+        +CommandSimulationResult():void
+        +CommandTruthTable():void
+        +CommandExit():void
+        +CommandUnknown():void
+    }
+
+    Device <|-- GateAND
+    Device <|-- GateOR
+    Device <|-- GateNOT
+@enduml
